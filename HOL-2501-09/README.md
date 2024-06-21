@@ -1,1 +1,1 @@
-# Lab Files for VMware HOL-2401-09-CMP
+# Lab Files for VMware HOL-2501-09-CMP

@@ -1,1 +1,1 @@
-Lab files for HOL-2401-03-CMP, Module 2 - Creating a Custom Alert Definition, 
+Lab files for HOL-2501-03-CMP, Module 2 - Creating a Custom Alert Definition, 
