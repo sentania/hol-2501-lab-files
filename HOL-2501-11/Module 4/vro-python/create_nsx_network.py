@@ -11,7 +11,6 @@ from vmware.vapi.stdlib.client.factories import StubConfigurationFactory
 from com.vmware.nsx_policy.model_client import Segment
 from com.vmware.nsx_policy.model_client import SegmentSubnet
 
-
 def nsx_create_client(nsx_user, nsx_password, nsx_endpoint, nsx_host, nsx_port):
     """Create NSX client for a given endpoint (nsx_endpoint, nsx_policy_client)"""
     session = requests.session()
@@ -42,18 +41,25 @@ def nsx_create_segment(nsx_client, segment_name, gateway_cidr, transport_zone_id
 
 
 def main(network_name, gateway_cidr):
+
+    nsxMgrUrl = 'nsx-mgmt.vcf.sddc.lab'
+    nsxMgrAdmin = 'admin'
+    nsxMgrPassword = 'VMware123!VMware123!'
+    t0Gateway = 'VLC-Tier-0'
+    transportZoneId = '6a781f84-516e-4be6-afac-0a7d8abbfabf'
+
     """End to end segment creation with hardcoded HOL values"""
     print('Connecting to NSX Manager...')
-    client = nsx_create_client(nsx_user='admin',
-                               nsx_password='VMware1!VMware1!',
+    client = nsx_create_client(nsx_user=nsxMgrAdmin,
+                               nsx_password=nsxMgrPassword,
                                nsx_endpoint=nsx_policy_client,
-                               nsx_host='nsx-mgr.corp.vmbeans.com', nsx_port=443)
+                               nsx_host=nsxMgrUrl, nsx_port=443)
 
     if network_name and gateway_cidr:
         print(f"Creating Network segment {network_name} - {gateway_cidr}")
         nsx_create_segment(client, network_name, gateway_cidr,
-                           '/infra/sites/default/enforcement-points/default/transport-zones/00bf1d71-8e63-4333-ba20-4469ff176841',
-                           '/infra/tier-0s/hol-gw')
+                           f'/infra/sites/default/enforcement-points/default/transport-zones/{transportZoneId}',
+                           f'/infra/tier-0s/{t0Gateway}')
     else:
         raise Exception(
             'No value for Segment name or Gateway. Segment not created')
