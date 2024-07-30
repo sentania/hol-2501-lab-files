@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><alertContent>
+    <Recommendations>
+        <Recommendation key="Recommendation-ud-c8e39e14-0184-4e20-b237-9e578d8ff9f7">
+            <Description>[HOL] Virtual Machine CPU Usage is High, add additional CPUs</Description>
+        </Recommendation>
+        <Recommendation key="Recommendation-ud-c047ef48-e1bd-4dd4-b40f-5b58b97eb155">
+            <Description>[HOL] Virtual Machine CPU Usage is low, remove extra CPUs</Description>
+        </Recommendation>
+    </Recommendations>
+</alertContent>

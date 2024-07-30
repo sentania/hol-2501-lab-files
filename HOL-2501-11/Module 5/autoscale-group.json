@@ -1,0 +1,58 @@
+{
+   "customGroups": [{
+      "resourceKind": "Service Level Objective",
+      "membershipDefinition": {"ruleGroups": [{
+         "resourceKind": "VirtualMachine",
+         "adapterKind": "VMWARE",
+         "rules": [{
+            "ruleOperator": "CONTAINS",
+            "tagCategory": "alertPolicy",
+            "ruleValue": "autoscale",
+            "ruleType": "ResourceTagRule"
+         }]
+      }]},
+      "adapterKind": "Container",
+      "autoResolveMembership": true,
+      "name": "AutoScale Policy Group",
+      "description": "",
+      "started": true,
+      "policy": "4e6cdb0b-1a92-4c52-bf86-864ff4caacfa"
+   }],
+   "customGroupTypes": [{
+      "resourceKind": "Service Level Objective",
+      "localization": [
+         {
+            "resourceKindName": "Service-Level-Ziel",
+            "locale": "de"
+         },
+         {
+            "resourceKindName": "服務層級目標",
+            "locale": "zh_TW"
+         },
+         {
+            "resourceKindName": "서비스 수준 목표",
+            "locale": "ko"
+         },
+         {
+            "resourceKindName": "サービス レベルの目標",
+            "locale": "ja"
+         },
+         {
+            "resourceKindName": "Service Level Objective",
+            "locale": "en"
+         },
+         {
+            "resourceKindName": "服务级别目标",
+            "locale": "zh_CN"
+         },
+         {
+            "resourceKindName": "Objectif de niveau de service",
+            "locale": "fr"
+         },
+         {
+            "resourceKindName": "Objetivo de nivel de servicio",
+            "locale": "es"
+         }
+      ]
+   }]
+}
