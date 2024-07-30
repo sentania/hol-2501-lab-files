@@ -2838,7 +2838,7 @@
                 </State>
             </SymptomDefinition>
             <SymptomDefinition adapterKind="VMWARE" disableInBasePolicy="true" id="SymptomDefinition-f8467da1-9b30-42f4-ba7d-f6e14494808c" name="Condition_5369cb24-59b3-4207-b6bc-590eb63055c1" resourceKind="VirtualMachine" symptomDefType="condition_self">
-                <State severity="critical">
+                <State severity="info">
                     <Condition key="cpu|usage_average" operator="&lt;" thresholdType="static" type="metric" value="20.0" valueType="numeric"/>
                 </State>
             </SymptomDefinition>
