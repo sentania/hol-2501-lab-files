@@ -45,8 +45,8 @@ def main(network_name, gateway_cidr):
     nsxMgrUrl = 'nsx-mgmt.vcf.sddc.lab'
     nsxMgrAdmin = 'admin'
     nsxMgrPassword = 'VMware123!VMware123!'
-    t0Gateway = 'VLC-Tier-0'
-    transportZoneId = '6a781f84-516e-4be6-afac-0a7d8abbfabf'
+    t0GatewayId = '327e36ad-ffb0-4def-a156-aca01754de7b'
+    transportZoneId = '447b4fec-2c0d-46ae-a551-907f5a4f4c19'
 
     """End to end segment creation with hardcoded HOL values"""
     print('Connecting to NSX Manager...')
@@ -59,7 +59,7 @@ def main(network_name, gateway_cidr):
         print(f"Creating Network segment {network_name} - {gateway_cidr}")
         nsx_create_segment(client, network_name, gateway_cidr,
                            f'/infra/sites/default/enforcement-points/default/transport-zones/{transportZoneId}',
-                           f'/infra/tier-0s/{t0Gateway}')
+                           f'/infra/tier-0s/{t0GatewayId}')
     else:
         raise Exception(
             'No value for Segment name or Gateway. Segment not created')
