@@ -1,0 +1,13 @@
+apiVersion: authorization.cci.vmware.com/v1alpha1
+kind: ProjectRoleBinding
+metadata:
+  # name must match the subject kind and name
+  name: cci:user:vcf.holo.lab:holadmin
+  namespace: hol-cci
+subjects:
+  - kind: User  # User / Group
+    name: "holadmin@vcf.holo.lab"  # UPN your name here
+roleRef:
+  apiGroup: authorization.cci.vmware.com
+  kind: ProjectRole
+  name: admin # admin / edit / view
