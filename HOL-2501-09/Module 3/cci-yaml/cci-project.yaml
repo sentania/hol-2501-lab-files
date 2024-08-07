@@ -1,0 +1,7 @@
+apiVersion: project.cci.vmware.com/v1alpha1
+kind: Project
+metadata:
+  name: hol-cci  # your cci project name here
+spec:
+  description: cci project
+  sharedResources: true

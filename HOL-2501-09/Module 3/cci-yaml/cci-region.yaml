@@ -1,0 +1,6 @@
+apiVersion: topology.cci.vmware.com/v1alpha1
+kind: Region
+metadata:
+  name: cci-region  # you region name here
+spec:
+  description: cci region
