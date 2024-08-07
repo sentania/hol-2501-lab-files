@@ -2,7 +2,7 @@
 $VSPHERE_WITH_TANZU_CONTROL_PLANE_IP = '10.80.0.2'
 $VSPHERE_WITH_TANZU_CLUSTER_NAMESPACE = 'rainpole'
 $VSPHERE_WITH_TANZU_CLUSTER_NAME = 'dev-project'
-$VSPHERE_WITH_TANZU_USERNAME = 'holadmine@vcf.holo.lab'
+$VSPHERE_WITH_TANZU_USERNAME = 'holadmin@vcf.holo.lab'
 $ENV:KUBECTL_VSPHERE_PASSWORD = 'VMware123!'
 
 # Connect to Supervisor cluster
