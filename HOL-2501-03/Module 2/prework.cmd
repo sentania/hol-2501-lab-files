@@ -2,13 +2,13 @@
 setlocal enabledelayedexpansion
 
 :: Define the remote server IP address
-set "server_ip=192.168.110.120"
+set "server_ip=10.64.12.10"
 
 :: Define the login name
 set "username=root"
 
 :: Set the local and remote directories
-set "local_directory=C:\hol-2401-lab-files\labfiles\HOL-2401-02"
+set "local_directory=C:\hol-2501-lab-files\labfiles\HOL-2501-03"
 set "remote_directory=/root"
 
 :: Define the file extension
