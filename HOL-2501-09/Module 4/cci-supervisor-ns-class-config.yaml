@@ -4,7 +4,7 @@ metadata:
   name: hol-ns-class   # your class name here
 spec:
   storageClasses:
-    - name: tanzu-storage-policy  # your storage class name that maps to your vCenter policy here
+    - name:  wld-cluster-01-vsan-storage-policy  # your storage class name that maps to your vCenter policy here
   vmClasses:
     - name: best-effort-small
     - name: best-effort-xsmall
