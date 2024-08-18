@@ -1,0 +1,10 @@
+apiVersion: infrastructure.cci.vmware.com/v1alpha1
+kind: SupervisorNamespaceClassBinding
+metadata:
+  name: hol-ns-class   # your class name here
+  namespace: hol-cci   # your cci project name here
+spec:
+  overrideParameters:
+    - name: podCountLimit
+      type: Integer
+      const: 100
