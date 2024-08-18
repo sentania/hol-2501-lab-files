@@ -1,7 +1,0 @@
-curl --insecure --location --request POST \
-  'https://rainpole.auto.sddc.lab/csp/gateway/am/api/login?access_token' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-  "username": "holadmin",
-  "password": 'VMware123!'
-  "domain": "vcf.holo.lab"}'
