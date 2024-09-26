@@ -1,0 +1,12 @@
+//Get original VM Name
+originalVMName = inputProperties.resourceNames[0];
+
+//Get the new VM Name based on the user input
+var customProperties = inputProperties.customProperties;
+newVMName = customProperties.newName;
+
+
+//Return the new name as resourceNames output parameter
+resourceNames = [];
+resourceNames[0] = newVMName;
+System.log("Setting machine name from '" + originalVMName + "' to '" + newVMName + "'");
