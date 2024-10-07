@@ -1,0 +1,12 @@
+apiVersion: topology.cci.vmware.com/v1alpha1
+kind: RegionBindingConfig
+metadata:
+  name: cci-region   # your region name here
+  namespace: hol-cci   # your cci project name here
+spec:
+  supervisorSelector:
+    matchExpressions:
+      - key: environment
+        operator: In
+        values:
+          - development   # your tag value here

@@ -1,0 +1,5 @@
+apiVersion: topology.cci.vmware.com/v1alpha1
+kind: RegionBinding
+metadata:
+  name: cci-region  # your region name here
+  namespace: hol-cci   # your cci project name here
