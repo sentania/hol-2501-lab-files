@@ -1,0 +1,12 @@
+apiVersion: infrastructure.cci.vmware.com/v1alpha1
+kind: SupervisorNamespaceClass
+metadata:
+  name: hol-ns-class  # your class name here
+spec:
+  description: supervisor namespace class
+  parameters:
+    - name: podCountLimit
+      type: Integer
+      minimum: 100
+      maximum: 1000
+      default: 500
