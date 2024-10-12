@@ -1,12 +1,7 @@
 {
    "entries": {"resourceKind": [
       {
-         "resourceKindKey": "mpb_gitlab_basic_namespace",
-         "internalId": "resourceKind:id:1_::_",
-         "adapterKindKey": "mpb_gitlab_basic"
-      },
-      {
-         "resourceKindKey": "mpb_gitlab_basic_branch",
+         "resourceKindKey": "mpb_gitlab_basic_gitlab_branch",
          "internalId": "resourceKind:id:3_::_",
          "adapterKindKey": "mpb_gitlab_basic"
       },
@@ -16,23 +11,26 @@
          "adapterKindKey": "mpb_gitlab_basic"
       },
       {
-         "resourceKindKey": "mpb_gitlab_basic_project",
+         "resourceKindKey": "mpb_gitlab_basic_gitlab_project",
          "internalId": "resourceKind:id:2_::_",
+         "adapterKindKey": "mpb_gitlab_basic"
+      },
+      {
+         "resourceKindKey": "mpb_gitlab_basic_gitlab_namespace",
+         "internalId": "resourceKind:id:1_::_",
          "adapterKindKey": "mpb_gitlab_basic"
       }
    ]},
    "dashboards": [{
-      "shared": false,
+      "shared": true,
       "temporary": false,
       "hidden": false,
-      "creationTime": 1728118903704,
+      "creationTime": 1728127579974,
       "autoswitchEnabled": false,
       "importAttempts": 0,
-      "lastUpdateUserId": "0c5885a4-2658-4420-a934-ee8c90ea3470",
       "columnProportion": "1-1",
       "importComplete": true,
       "description": "",
-      "columnCount": 1,
       "widgets": [
          {
             "collapsed": false,
@@ -46,14 +44,13 @@
             "type": "ResourceList",
             "title": "GitLab Instances",
             "config": {
-               "refreshInterval": 300,
                "resource": [],
+               "refreshInterval": 300,
                "refreshContent": {"refreshContent": false},
                "relationshipMode": {"relationshipMode": 0},
                "title": "GitLab Instances",
                "additionalColumns": [],
                "mode": "all",
-               "filterMode": "tagPicker",
                "tagFilter": {
                   "path": ["/source/kind/kind:resourceKind:id:0_::_"],
                   "value": {
@@ -66,12 +63,13 @@
                      "adapterInstance": [],
                      "collector": [],
                      "tier": [],
-                     "state": [],
                      "tag": [],
+                     "state": [],
                      "day": [],
                      "status": []
                   }
                },
+               "filterMode": "tagPicker",
                "depth": 1,
                "customFilter": {
                   "filter": [],
@@ -97,13 +95,13 @@
                "y": 1
             },
             "type": "ResourceList",
-            "title": "GitLab Namespace",
+            "title": "GitLab Namespaces",
             "config": {
                "refreshInterval": 300,
                "resource": [],
                "refreshContent": {"refreshContent": false},
                "relationshipMode": {"relationshipMode": -1},
-               "title": "GitLab Namespace",
+               "title": "GitLab Namespaces",
                "additionalColumns": [],
                "mode": "all",
                "filterMode": "tagPicker",
@@ -187,25 +185,25 @@
                         "metricKey": "build_timeout",
                         "handleOldColoring": false,
                         "link": "",
-                        "resourceKindName": "Project",
+                        "resourceKindName": "GitLab-Project",
                         "isStringMetric": false,
                         "resourceKindId": "resourceKind:id:2_::_",
                         "redBound": null,
-                        "id": "extModel5760-1",
+                        "id": "extModel4612-1",
                         "orangeBound": null,
                         "colorMethod": 1
                      },
                      {
                         "yellowBound": null,
-                        "metricName": "Default Branch",
-                        "metricKey": "default_branch",
+                        "metricName": "Name",
+                        "metricKey": "Name",
                         "handleOldColoring": false,
                         "link": "",
-                        "resourceKindName": "Project",
+                        "resourceKindName": "GitLab-Project",
                         "isStringMetric": true,
                         "resourceKindId": "resourceKind:id:2_::_",
                         "redBound": null,
-                        "id": "extModel5760-2",
+                        "id": "extModel4612-2",
                         "orangeBound": null,
                         "colorMethod": 1
                      },
@@ -215,25 +213,25 @@
                         "metricKey": "ownername",
                         "handleOldColoring": false,
                         "link": "",
-                        "resourceKindName": "Project",
+                        "resourceKindName": "GitLab-Project",
                         "isStringMetric": true,
                         "resourceKindId": "resourceKind:id:2_::_",
                         "redBound": null,
-                        "id": "extModel5760-3",
+                        "id": "extModel4612-3",
                         "orangeBound": null,
                         "colorMethod": 1
                      },
                      {
                         "yellowBound": null,
-                        "metricName": "Created At",
-                        "metricKey": "created_at",
+                        "metricName": "Default Branch",
+                        "metricKey": "default_branch",
                         "handleOldColoring": false,
                         "link": "",
-                        "resourceKindName": "Project",
+                        "resourceKindName": "GitLab-Project",
                         "isStringMetric": true,
                         "resourceKindId": "resourceKind:id:2_::_",
                         "redBound": null,
-                        "id": "extModel5760-4",
+                        "id": "extModel4612-4",
                         "orangeBound": null,
                         "colorMethod": 1
                      }
@@ -256,13 +254,13 @@
                "y": 1
             },
             "type": "ResourceList",
-            "title": "GitLab Project",
+            "title": "GitLab Projects",
             "config": {
                "refreshInterval": 300,
                "resource": [],
                "refreshContent": {"refreshContent": false},
                "relationshipMode": {"relationshipMode": -1},
-               "title": "GitLab Project",
+               "title": "GitLab Projects",
                "additionalColumns": [],
                "mode": "all",
                "filterMode": "tagPicker",
@@ -309,13 +307,13 @@
                "y": 7
             },
             "type": "ResourceList",
-            "title": "GitLab Branch",
+            "title": "GitLab Branches",
             "config": {
                "refreshInterval": 300,
                "resource": [],
                "refreshContent": {"refreshContent": false},
                "relationshipMode": {"relationshipMode": -1},
-               "title": "GitLab Branch",
+               "title": "GitLab Branches",
                "additionalColumns": [],
                "mode": "all",
                "filterMode": "tagPicker",
@@ -376,11 +374,11 @@
                         "metricName": "Author Name",
                         "metricKey": "author_name",
                         "handleOldColoring": false,
-                        "resourceKindName": "Branch",
+                        "resourceKindName": "GitLab-Branch",
                         "isStringMetric": true,
                         "resourceKindId": "resourceKind:id:3_::_",
                         "redBound": null,
-                        "id": "extModel4396-2",
+                        "id": "extModel3921-1",
                         "orangeBound": null,
                         "colorMethod": 1
                      },
@@ -389,11 +387,11 @@
                         "metricName": "Can Push",
                         "metricKey": "can_push",
                         "handleOldColoring": false,
-                        "resourceKindName": "Branch",
+                        "resourceKindName": "GitLab-Branch",
                         "isStringMetric": true,
                         "resourceKindId": "resourceKind:id:3_::_",
                         "redBound": null,
-                        "id": "extModel4396-3",
+                        "id": "extModel3921-2",
                         "orangeBound": null,
                         "colorMethod": 1
                      },
@@ -402,11 +400,11 @@
                         "metricName": "Developers Can Merge",
                         "metricKey": "developers_can_merge",
                         "handleOldColoring": false,
-                        "resourceKindName": "Branch",
+                        "resourceKindName": "GitLab-Branch",
                         "isStringMetric": true,
                         "resourceKindId": "resourceKind:id:3_::_",
                         "redBound": null,
-                        "id": "extModel4396-4",
+                        "id": "extModel3921-3",
                         "orangeBound": null,
                         "colorMethod": 1
                      },
@@ -415,11 +413,24 @@
                         "metricName": "Developers Can Push",
                         "metricKey": "developers_can_push",
                         "handleOldColoring": false,
-                        "resourceKindName": "Branch",
+                        "resourceKindName": "GitLab-Branch",
                         "isStringMetric": true,
                         "resourceKindId": "resourceKind:id:3_::_",
                         "redBound": null,
-                        "id": "extModel4396-5",
+                        "id": "extModel3921-4",
+                        "orangeBound": null,
+                        "colorMethod": 1
+                     },
+                     {
+                        "yellowBound": null,
+                        "metricName": "Merged",
+                        "metricKey": "merged",
+                        "handleOldColoring": false,
+                        "resourceKindName": "GitLab-Branch",
+                        "isStringMetric": true,
+                        "resourceKindId": "resourceKind:id:3_::_",
+                        "redBound": null,
+                        "id": "extModel3921-5",
                         "orangeBound": null,
                         "colorMethod": 1
                      },
@@ -428,11 +439,11 @@
                         "metricName": "Protected",
                         "metricKey": "protected",
                         "handleOldColoring": false,
-                        "resourceKindName": "Branch",
+                        "resourceKindName": "GitLab-Branch",
                         "isStringMetric": true,
                         "resourceKindId": "resourceKind:id:3_::_",
                         "redBound": null,
-                        "id": "extModel4396-6",
+                        "id": "extModel3921-6",
                         "orangeBound": null,
                         "colorMethod": 1
                      }
@@ -452,17 +463,19 @@
                "showMetricFullName": {"metricFullName": false},
                "resInteractionMode": null
             },
-            "height": 324
+            "height": 324,
+            "states": [{
+               "value": "o%3Acolumns%3Da%253Ao%25253Aid%25253Ds%2525253Ah1%25255Ehidden%25253Db%2525253A1%25255Ewidth%25253Dn%2525253A100%255Eo%25253Aid%25253Ds%2525253Ah2%255Eo%25253Aid%25253Ds%2525253Ah3%255Eo%25253Aid%25253Ds%2525253Ah4",
+               "key": "permMetricListDataGrid_metricGrid_widget_5fab7edf-afd5-43b8-a16b-e6a26ef85b75_43dbe27d-ad35-4d29-bd57-9f74c1d45281"
+            }]
          }
       ],
-      "userId": "0c5885a4-2658-4420-a934-ee8c90ea3470",
       "states": [],
       "homeTab": false,
-      "name": "GitLab Overview",
-      "gridsterMaxColumns": 12,
       "rank": 0,
       "disabled": false,
       "id": "5fab7edf-afd5-43b8-a16b-e6a26ef85b75",
+      "adapterName": "mpb_gitlab_basic",
       "locked": false,
       "dashboardNavigations": {},
       "widgetInteractions": [
@@ -492,7 +505,12 @@
             "widgetIdReceiver": "6d7a32fe-d6ca-4562-9496-7fc014c52e33"
          }
       ],
-      "lastUpdateTime": 1728119900029
+      "lastUpdateUserId": "e52ec17b-3fbe-402e-aee5-a61af6175674",
+      "columnCount": 1,
+      "userId": "e52ec17b-3fbe-402e-aee5-a61af6175674",
+      "name": "GitLab Overview",
+      "gridsterMaxColumns": 12,
+      "lastUpdateTime": 1728385268242
    }],
-   "uuid": "9ff75537-0e2e-4b6a-ac0d-1560db30152d"
+   "uuid": "23394fbc-7edd-4da8-a5e2-fd77274466cf"
 }
