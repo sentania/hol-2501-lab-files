@@ -85,3 +85,113 @@ if ($cloudAccount) {
     Write-Host "Cloud account '$cloudAccountOldName' not found."
 }
 Write-host -foregroundcolor Green "Aria Automation prep completed"
+
+
+Write-host "Sleeping 30 seconds to help prevent any race conditions..." -ForegroundColor Green
+sleep 30
+
+
+##Now that aria is prepped we need to create the kubernetes resources for CCI.
+# Set the path to kubectl if it's needed explicitly
+$kubectlPath = "C:\kubectl\bin\kubectl.exe"
+
+# Function to check command success and handle failure
+function Check-Success {
+    if (-not $?) {
+        Write-Host "ERROR: The HOL pod is likely in a bad state. Please ask for help or launch a new pod." -ForegroundColor Red
+        Exit 1  # Exit with a non-zero code to indicate failure
+    }
+}
+
+# Step 1: Export the password to an environment variable for non-interactive login
+$env:KUBECTL_CCI_PASSWORD="VMware123!"
+
+# Step 2: Login to CCI
+$result = & $kubectlPath cci login -u holadmin@vcf.holo.lab --server rainpole.auto.vcf.sddc.lab --insecure-skip-tls-verify
+Check-Success
+
+# Step 3: Set CCI context
+& $kubectlPath config use-context cci
+Check-Success
+
+# Step 4: Check current Kubernetes resources
+& $kubectlPath get supervisors -n cci-config
+Check-Success
+
+& $kubectlPath get projects -n cci-config
+Check-Success
+
+# Step 5: Create base environment config resources
+$yamlFiles = @(
+    "C:\labfiles\HOL-2501-09\Module 4\cci-project.yaml",
+    "C:\labfiles\HOL-2501-09\Module 4\cci-projectbinding-users.yaml",
+    "C:\labfiles\HOL-2501-09\Module 4\cci-region.yaml"
+)
+
+foreach ($yamlFile in $yamlFiles) {
+    Write-Host "Applying $yamlFile..." -ForegroundColor Green
+    & $kubectlPath create -f $yamlFile
+    Check-Success
+}
+
+# Step 6: Modify Supervisor resource to reference the newly created region
+# Variables
+$namespace = "cci-config"
+$supervisorName = "vcf-mgmt-vcenter:domain-c4001"
+
+# Get the current Supervisor resource YAML
+Write-Host "Patching supervisor with region labels..." -ForegroundColor Green
+& $kubectlPath get supervisor $supervisorName -n $namespace -o yaml > supervisor.yaml
+Check-Success
+
+# Modify the YAML file
+$yamlContent = Get-Content -Path "supervisor.yaml"
+$updatedYamlContent = @()
+$labelsAdded = $false
+$regionNamesAdded = $false
+
+foreach ($line in $yamlContent) {
+    if ($line -match "labels: \{\}") {
+        $updatedYamlContent += $line.split("{")[0]
+        $updatedYamlContent += "    environment: development"
+        $labelsAdded = $true
+    }
+    elseif ($line -match "cloudAccountName:" -and -not $regionNamesAdded) {
+        $updatedYamlContent += $line
+        $updatedYamlContent += "  regionNames:"
+        $updatedYamlContent += "    - cci-region"
+        $regionNamesAdded = $true
+    }
+    else {
+        $updatedYamlContent += $line
+    }
+}
+
+# Write the modified YAML back to the file
+Set-Content -Path "supervisor.yaml" -Value $updatedYamlContent
+
+# Apply the modified YAML
+& $kubectlPath apply -f supervisor.yaml
+Check-Success
+
+# Cleanup the temporary file
+Remove-Item "supervisor.yaml"
+
+# Step 7: Apply remaining Kubernetes resources
+$yamlFilesRemaining = @(
+    "C:\labfiles\HOL-2501-09\Module 4\cci-regionbinding.yaml",
+    "C:\labfiles\HOL-2501-09\Module 4\cci-regionbindingconfig.yaml",
+    "C:\labfiles\HOL-2501-09\Module 4\cci-supervsor-ns-class.yaml",
+    "C:\labfiles\HOL-2501-09\Module 4\cci-supervsor-ns-class-binding.yaml",
+    "C:\labfiles\HOL-2501-09\Module 4\cci-supervsor-ns-class-config.yaml"
+)
+
+foreach ($yamlFile in $yamlFilesRemaining) {
+    Write-Host "Applying $yamlFile..." -ForegroundColor
+    & $kubectlPath create -f $yamlFile
+    Check-Success
+}
+
+Write-Host "All resources have been successfully created."
+
+Write-host "Aria Automation CCI has been successfully setup for HOL-2501-09 Module 4."
