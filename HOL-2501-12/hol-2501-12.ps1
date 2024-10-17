@@ -9,7 +9,7 @@ Get-ChildItem -path "c:\gitlab" -Directory -Recurse -Filter ".git" -Hidden | Rem
 
 $list | ForEach-Object {
     $target = "$path\$_"
-    If ( -Not (Test-Path -Path $loc))
+    If ( -Not (Test-Path -Path $target))
     {
         Write-Output "Creating $target folder"
         New-Item -Path $path -Name $_ -ItemType Directory
