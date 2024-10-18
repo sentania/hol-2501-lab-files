@@ -1,8 +1,4 @@
-Write-Output "$(Get-Date) Lab Files Clean Up Script"
-
-Get-ChildItem -path "C:\labfiles" -Recurse -Filter ".gitattributes" | Remove-Item -Force -Recurse
-Get-ChildItem -path "C:\labfiles" -Recurse -Filter ".gitignore" | Remove-Item -Force -Recurse
-Get-ChildItem -path "C:\labfiles" -Recurse -Filter "README.md" | Remove-Item -Force -Recurse
+Write-Output "$(Get-Date) HOL-2501-12 Management Pack Builder PreReqs"
 
 $list = @('hol-moad','hol-demo')
 $path = "c:\gitlab"
@@ -13,7 +9,7 @@ Get-ChildItem -path "c:\gitlab" -Directory -Recurse -Filter ".git" -Hidden | Rem
 
 $list | ForEach-Object {
     $target = "$path\$_"
-    If ( -Not (Test-Path -Path $loc))
+    If ( -Not (Test-Path -Path $target))
     {
         Write-Output "Creating $target folder"
         New-Item -Path $path -Name $_ -ItemType Directory
