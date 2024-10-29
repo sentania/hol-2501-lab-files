@@ -1,0 +1,23 @@
+formatVersion: 1
+inputs: {}
+resources:
+  namespace:
+    type: CCI.Supervisor.Namespace
+    properties:
+      name: ns-hol-cci
+      className: hol-ns-class
+      regionName: cci-region
+  tkg_vm:
+    type: CCI.Supervisor.Resource
+    properties:
+      context: ${resource.namespace.id}
+      manifest:
+        apiVersion: vmoperator.vmware.com/v1alpha1
+        kind: VirtualMachine
+        metadata:
+          name: tkg-vm
+        spec:
+          className: best-effort-xsmall
+          imageName: vmi-8b6035e802369df03
+          powerState: poweredOn
+          storageClass: hol-cci-sp
