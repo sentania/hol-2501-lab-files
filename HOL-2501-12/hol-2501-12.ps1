@@ -79,6 +79,7 @@ Write-Host "TASK: Create Management Pack Builder Bookmark" -ForegroundColor Yell
 
 $registryPath = "HKLM:\\SOFTWARE\\Policies\\Mozilla\\FireFox\\Bookmarks\22"
 
+New-Item -Path $registryPath -Force
 Set-ItemProperty $registryPath -Name "Title" -Value "Aria Operations MP Builder" -Type "String"
 Set-ItemProperty $registryPath -Name "URL" -Value "https://mpb.vcf.sddc.lab/login" -Type "String"
 Set-ItemProperty $registryPath -Name "Favicon" -Value "https://mpb.vcf.sddc.lab/favicon.ico" -Type "String"
