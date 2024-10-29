@@ -124,7 +124,7 @@ Check-Success
 # Step 5: Create base environment config resources
 $yamlFiles = @(
     "C:\labfiles\HOL-2501-09\Module 4\cci-project.yaml",
-    "C:\labfiles\HOL-2501-09\Module 4\cci-projectrolebinding-users.yaml",
+    "C:\labfiles\HOL-2501-09\Module 4\cci-projectrolerolebinding-users.yaml",
     "C:\labfiles\HOL-2501-09\Module 4\cci-region.yaml"
 )
 
@@ -181,13 +181,13 @@ Remove-Item "supervisor.yaml"
 $yamlFilesRemaining = @(
     "C:\labfiles\HOL-2501-09\Module 4\cci-regionbinding.yaml",
     "C:\labfiles\HOL-2501-09\Module 4\cci-regionbindingconfig.yaml",
-    "C:\labfiles\HOL-2501-09\Module 4\cci-supervsor-ns-class.yaml",
-    "C:\labfiles\HOL-2501-09\Module 4\cci-supervsor-ns-class-binding.yaml",
-    "C:\labfiles\HOL-2501-09\Module 4\cci-supervsor-ns-class-config.yaml"
+    "C:\labfiles\HOL-2501-09\Module 4\cci-supervisor-ns-class.yaml",
+    "C:\labfiles\HOL-2501-09\Module 4\cci-supervisor-ns-class-binding.yaml",
+    "C:\labfiles\HOL-2501-09\Module 4\cci-supervisor-ns-class-config.yaml"
 )
 
 foreach ($yamlFile in $yamlFilesRemaining) {
-    Write-Host "Applying $yamlFile..." -ForegroundColor
+    Write-Host "Applying $yamlFile..." -ForegroundColor Green
     & $kubectlPath create -f $yamlFile
     Check-Success
 }
