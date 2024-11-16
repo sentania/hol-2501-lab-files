@@ -1,0 +1,135 @@
+formatVersion: 2
+metadata:
+  deploymentSettings:
+    disableUpdateDay2Action: true
+    hideDisabledDay2Actions: true
+outputs:
+  __deploymentOverview:
+    value: |-
+      ## Cloud Consumption Interface Deployed Virtual Machine
+
+      This virtual machine was deployed by the Cloud Consumption Interface.  
+
+      ### SSH Address
+
+      - SSH IP: ${resource.SSH_SVC.object.status.loadBalancer.ingress[0].ip}
+
+      ### Credentials
+
+      - User: holuser
+      - Password: ${input.passwd}
+inputs:
+  namespace_Name:
+    type: string
+    pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+    maxLength: 63
+    minLength: 1
+    title: Supervisor Namespace Name
+    description: May contain lowercase alphanumeric characters and "-" only.
+  region_Name:
+    type: string
+    title: Region
+    description: Select a Region.
+    enum:
+      - cci-region
+  class_Name:
+    type: string
+    title: Supervisor Namespace Class
+    description: Select a Supervisor Namespace Class.
+    enum:
+      - hol-ns-class
+  vm_class_Name:
+    type: string
+    title: Virtual Machine Class (Size)
+    description: Select a Virtual Machine Class (Size).
+    oneOf:
+      - title: best-effort-small - 2 CPUs and 4 GB memory
+        const: best-effort-small
+      - title: best-effort-medium - 2 CPUs and 8 GB memory
+        const: best-effort-medium
+  vm_Name:
+    type: string
+    title: Virtual Machine Name
+    description: ' Enter a name for the Virtual Machine'
+  passwd:
+    type: string
+    title: HOL User Password
+resources:
+  Namespace:
+    type: CCI.Supervisor.Namespace
+    properties:
+      name: ${input.namespace_Name}
+      className: ${input.class_Name}
+      regionName: ${input.region_Name}
+  CloudInit:
+    type: CCI.Supervisor.Resource
+    properties:
+      context: ${resource.Namespace.id}
+      manifest:
+        apiVersion: v1
+        kind: Secret
+        metadata:
+          name: ${input.vm_Name}-bootstrap-secret
+          labels:
+            vm-selector: ${input.vm_Name}
+        stringData:
+          user-data: |
+            #cloud-config
+            users:
+              - name: holuser
+                sudo: ['ALL=(ALL) NOPASSWD:ALL']
+                groups: sudo
+                shell: /bin/bash
+            runcmd:
+              - USER=holuser
+              - PASS=${input.passwd}
+              - echo $USER:$PASS | /usr/sbin/chpasswd
+              - sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+              - service ssh reload
+              - echo 'Cloud-init is done!' >> /tmp/finished.txt
+  ubuntuVM:
+    type: CCI.Supervisor.Resource
+    dependsOn:
+      - CloudInit
+    properties:
+      context: ${resource.Namespace.id}
+      manifest:
+        apiVersion: vmoperator.vmware.com/v1alpha1
+        kind: VirtualMachine
+        metadata:
+          name: ${input.vm_Name}
+          labels:
+            vm-selector: ${input.vm_Name}
+            vm-lb-selector: ${input.vm_Name}-lb
+        spec:
+          className: ${input.vm_class_Name}
+          imageName: vmi-8b6035e802369df03
+          storageClass: hol-cci-sp
+          powerState: poweredOn
+          vmMetadata:
+            secretName: ${input.vm_Name}-bootstrap-secret
+            transport: CloudInit
+  SSH_SVC:
+    type: CCI.Supervisor.Resource
+    dependsOn:
+      - ubuntuVM
+    properties:
+      context: ${resource.Namespace.id}
+      wait:
+        fields:
+          - path: status.loadBalancer.ingress[0].ip
+            value: '*'
+      manifest:
+        apiVersion: vmoperator.vmware.com/v1alpha1
+        kind: VirtualMachineService
+        metadata:
+          name: ${input.vm_Name}-lb
+        spec:
+          selector:
+            vm-lb-selector: ${input.vm_Name}-lb
+          type: LoadBalancer
+          ports:
+            - name: ssh
+              protocol: TCP
+              port: 22
+              targetPort: 22
