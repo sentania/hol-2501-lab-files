@@ -53,7 +53,7 @@ function Invoke-AriaApiRequest {
 }
 
 # Get the project by name
-$projectUri = "$ariaServer/iaas/api/projects?apiVersion=$apiVersion&$filter=name eq '$projectOldName'"
+$projectUri = "$ariaServer/iaas/api/projects?apiVersion=$apiVersion&`$filter=name eq '$projectOldName'"
 $project = Invoke-AriaApiRequest -method Get -uri $projectUri
 
 if ($project) {
@@ -69,7 +69,7 @@ if ($project) {
 }
 
 # Get the cloud account by name
-$cloudAccountUri = "$ariaServer/iaas/api/cloud-accounts?apiVersion=$apiVersion&$filter=name eq '$cloudAccountOldName'"
+$cloudAccountUri = "$ariaServer/iaas/api/cloud-accounts?apiVersion=$apiVersion&`$filter=name eq '$cloudAccountOldName'"
 $cloudAccount = Invoke-AriaApiRequest -method Get -uri $cloudAccountUri
 
 if ($cloudAccount) {
