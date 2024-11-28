@@ -124,7 +124,7 @@ Check-Success
 # Step 5: Create base environment config resources
 $yamlFiles = @(
     "C:\labfiles\HOL-2501-09\Module 4\cci-project.yaml",
-    "C:\labfiles\HOL-2501-09\Module 4\cci-projectrolerolebinding-users.yaml",
+    "C:\labfiles\HOL-2501-09\Module 4\cci-projectrolebinding-users.yaml",
     "C:\labfiles\HOL-2501-09\Module 4\cci-region.yaml"
 )
 
